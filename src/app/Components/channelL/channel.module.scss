@@ -1,8 +1,32 @@
+.cusom_link{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    border-radius: 16px;
+    box-shadow: 0px 0px 10px 1px rgb(0 0 0 / 50%);
+    :not(img):hover{box-shadow: 0px 0px 10px 1px rgb(0 0 0 / 80%);}
+    p{
+        background-color: white !important;
+    }
+}
 .ch_title{
     color: black;
+overflow: hidden;
+display: flex;
+    flex-direction: column;
+    justify-content: space-between;    
+    text-align: center;
+    
+    border-radius: 16px;
+}
+.ch_title div{
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .ch_title img:hover{
-scale: 1.2;
+transform:scale(1.2);
 overflow: hidden;
 }
 .ch_title a{
