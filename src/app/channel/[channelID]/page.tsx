@@ -23,14 +23,26 @@ const ChannelID = () => {
     const filter:Channel[] = channelInfo.filter((item)=>item.id==num);
     const filtertwo:string[]= filter.map((item)=>item.url);
     const parse:string =filtertwo.join()
+    const url2: number[] = filter
+    .filter(item => item.urlTwo !== undefined)
+    .flatMap(item => item.urlTwo!);
   
-    let u:number[]=[]
+  
+  let u:number[]=[]
     for(let i:number=0;i<=parse.length-1;i++){
        u.push(parse.charCodeAt(i)-num);
       
     }
-    console.log(u);
+console.log("urlTwo:[",u.join(),"],");
+
     
+    let decoded:string = "";
+    for (let i = 0; i < url2.length; i++) {
+        decoded += String.fromCharCode(url2[i] + num);
+    }
+
+
+
     useEffect(()=>{
         
         setNumberCH(num);
@@ -49,7 +61,9 @@ const ChannelID = () => {
     
     {filterCH?(filterCH.map((item)=>
         (<div key={item.id} className="custom_container">
-        <div className="flex items-start gap-5"><Image style={{ backgroundColor: `${item.bgColor}` }} src={item.img} height={150} alt="channel"/> <p>{item.name}</p></div>
+        <div className="flex items-start gap-5"><Image style={{ backgroundColor: `${item.bgColor}` }} src={item.img} height={150} alt="channel"/> <p>{item.description}</p></div>
+        <h1>{decoded}</h1><br />
+        <h2>{u}</h2>
         <div>
         <MediaController
       style={{
@@ -61,7 +75,7 @@ const ChannelID = () => {
       
       <ReactPlayer
         slot="media"
-        src={parse}
+        src={decoded}
         controls={false}
         style={{
           width: "100%",
