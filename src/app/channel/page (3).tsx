@@ -5,7 +5,7 @@ const Channel = () => {
   return (
       <section id="channel_page">
     <div>
-        <ChannelList/>
+        <ChannelList data="false"/>
     </div>
     </section>
   )
