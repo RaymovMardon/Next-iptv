@@ -3,21 +3,30 @@
 :root {
   --foreground: #171717;
 }
-*{
-  margin: 0;
-  padding: 0;
+*{ 
   list-style-type: none;
   text-decoration: none;
   box-sizing: border-box;
+  transition: all 0.4s linear;
 }
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 .hero_bg{
-  background: url(../../public/img/backround.webp), linear-gradient(180deg,rgb(250, 250, 250) 0%, rgba(0, 0, 0, 0.9) 100%) ;
+  position: relative;
+  background: linear-gradient(180deg,rgb(250, 250, 250, 0) 0%, rgba(0, 0, 0, 0.9) 100%) ;
   background-blend-mode: multiply;
   
+}
+#ReactBackgroundSlider > figure {
+  position: absolute !important;
+}
+h6{
+  color: #173a52;
+  margin: 60px 1rem;
+  font-size: 2rem;
+  font-weight: 600;
 }
 .mcontrolbar{
   padding:0 10px ;
@@ -34,8 +43,11 @@
 .mbtn:hover{
   background-color: rgba(0, 0, 0, 0.6) !important;
 }
+.hero{
+  padding: 50px 0;
+}
 .hero_bg div{
-  padding: 30px 0;
+  padding: 40px 0;
 }
 .hero_bg h2{
   font-size: 60px;
@@ -45,11 +57,47 @@
   padding: 10px 20px;
   border-radius: 8px;
   font-size: 18px;
-  background-color: #023E8A;
+  margin: 20px 0 0;
+  background-color: #023E8A; cursor: pointer;
+  transition: all 0.3s linear !important;
+}
+.hero_bg button:hover,.hero_bg button:focus,.hero_bg button:active{
+  transform: scale(1.1);
 }
 .img_hero_button img{
   width: 100%;
 
+}
+header{
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+  background-color: #023E8A;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.06); 
+}
+header div{
+  color: white;
+}
+header .header_nav{
+  padding: 15px 0;
+}
+header .header_nav li{
+  position: relative;
+}
+header .header_nav li::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+header .header_nav li:hover::after {
+  width: 100%;
 }
 footer .footer_wrp{
   background: url(../../public/img/pattern.png),#023d8a75;
