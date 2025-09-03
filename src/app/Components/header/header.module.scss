@@ -4,6 +4,11 @@
     height: 0; // стартуем с 0, вместо display: none
     overflow: hidden; // чтобы контент не вылазил
     animation: expandHeight 0.5s ease forwards;
+    width: 100%;
+    position: fixed;
+    margin: 51px 0 0;
+    z-index: 1000;
+    padding: 3px 0;
 li{
     color: #023e8ad9;
   padding: 5px 10px;
@@ -20,6 +25,12 @@ li:hover,:active{
   background-color: #ececec;
 }
 }
+.kateegory_btn ul{
+  display: flex;
+  
+  justify-content: center;
+  gap: 10px;
+}
 @keyframes expandHeight {
   0%   { height: 0; }
   100% { height: 56px; }
@@ -30,11 +41,94 @@ li:hover,:active{
   height: 56px; 
   overflow: hidden; // чтобы контент не вылазил
   animation: expandHeightHidden 0.4s ease forwards;
+  width: 100%;
+    position: fixed;
+    margin: 51px 0 0;
+    z-index: 1000;
+    padding: 3px 0;
 }
 @keyframes expandHeightHidden {
   0%   { height: 56px; }
   100% { height: 0; }
 }
 
+.nav_mobile{
+  display: none;
+}
+@media only screen and (max-width:1024px) {
+  @keyframes expandHeightHidden {
+    0%   { height: 100px !important; }
+    100% { height: 0; }
+  }
+  @keyframes expandHeight {
+    0%   { height: 0; }
+    100% { height: 100px; }
+  }
+  .kateegory_btn{
+    
+li{
+margin: 0px 5px 0;
+}
+}
+.kateegory_btn ul{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: center;
+  gap: 10px;
+}
+}
 
-
+@media only screen and (max-width:639px) {
+  .nav_mobile{
+    z-index: 99;
+    margin: 55px 0;
+    padding: 0px 10px;
+    position: fixed;
+    display: block;
+    width: 100%;
+    ul{
+      border-radius: 6px;
+      padding: 10px 30px;
+      background-color: #023E8A;
+      li{
+        text-align: center;
+        color: #023e8ad9;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 500;
+      margin: 10px 0 10px;
+      background-color: white; cursor: pointer;
+      transition: all 0.3s linear !important;
+      
+    }
+    li:hover,:active{
+      color: #023E8A;
+      background-color: #ececec;
+      
+    }
+    }
+  }
+  .kateegory_btn{
+    margin: 262px 0 0;
+    border-radius: 4px;
+    padding: 10px 0;
+  }
+  @keyframes expandHeight {
+    0%   { height:0px; }
+    100% { height: 200px; }
+  }
+  
+  .kateegory_btn ul{
+    display: grid;
+    grid-template-columns: 1fr 1fr;}
+}
+@media only screen and (max-width:410px) {
+  .kateegory_btn ul{
+    display: grid;
+    grid-template-columns: 1fr;}
+    @keyframes expandHeight {
+      0%   { height:0px; }
+      100% { height: 390px; }
+}
+}
