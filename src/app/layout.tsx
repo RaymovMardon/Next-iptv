@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "../../node_modules/next/script";
 import Footer from "./Components/footer/index";
 import Header from "./Components/header/index";
 import "./globals.css";
@@ -25,8 +26,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
+    
+    <html lang="ru">
+      <Script id="google-translate-init" strategy="afterInteractive">
+         
+         {`
+          function googleTranslateElementInit() { new google.translate.TranslateElement({ 
+            pageLanguage: 'ru',
+             includedLanguages: 'ru,uz', 
+             autoDisplay: false,   
+             layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, 
+             'google_translate_element'); } `} 
+             </Script> 
+             {/* Скрипт самого Google Translate */} 
+             <Script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" 
+             strategy="afterInteractive" /> 
+             <Script id="custom-translate-fix" strategy="afterInteractive"> {`
+              const myDictionary = { "Телеканалы": "Telekanallar",
+               "Категории": "Kategotiya",
+                "Главная": "Bosh sahifa",
+              "Телевидение без границ":"Chegarasiz televideniye", }; 
+              function applyCustomTranslations() { const elements = document.querySelectorAll("body *"); elements.forEach(el => { if (el.childNodes.length === 1 && el.childNodes[0].nodeType === 3) { let text = el.textContent; for (const [orig, custom] of Object.entries(myDictionary)) { text = text.replace(new RegExp(orig, "gi"), custom); } el.textContent = text; } }); 
+            } // Следим за изменениями DOM (когда Google Translate подменяет текст) 
+            const observer = new MutationObserver(() => {
+              const lang = document.querySelector("html").getAttribute("lang");
+              if (lang === "uz") {
+                applyCustomTranslations();
+              }
+            });
+                observer.observe(document.body, { childList: true, subtree: true }); `} 
+                </Script>
+      <body id="custom_id"
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Header/>
