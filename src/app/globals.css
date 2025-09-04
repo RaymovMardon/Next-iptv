@@ -8,10 +8,31 @@
   text-decoration: none;
   box-sizing: border-box;
   transition: all 0.4s linear;
+ 
 }
+
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+.skiptranslate div{
+  display: flex;
+}
+.goog-te-gadget-simple{
+  display: flex;
+  background-color: #023E8A !important;
+  border: none !important;
+}
+.goog-te-gadget-simple span{
+  display: flex;
+}
+.goog-te-gadget-simple img{
+ display: none !important;
+}
+.goog-te-gadget-simple span a{
+  display: flex;
+  gap: 6px;
+  color: white !important;
 }
 .hero_bg{
   position: relative;
@@ -81,6 +102,9 @@ header div{
 header .header_nav{
   padding: 15px 0;
 }
+header .header_button{
+  padding: 5px 0;
+}
 header .header_nav li{
   position: relative;
 }
@@ -128,4 +152,32 @@ body {
    max-width: 1280px;
    margin: 0 auto;
    padding: 0 20px;
+ }
+ footer{
+   text-align: start;
+ }
+ @media only screen and (max-width:638px) {
+  .hero_bg h2{
+    font-size: 2.2rem;
+    padding: 0 1rem;
+  }
+  footer .footer_wrp {
+    
+    height: auto;}
+  footer{
+    text-align: center;
+  }
+  h6{
+   
+    font-size: 1.6rem;
+    
+  }  
+ }
+ @media only screen and (max-width:290px) {
+  h6 {
+   
+    margin: 60px 0.1rem;
+    font-size: 1.5rem;
+   
+}
  }
