@@ -18,9 +18,9 @@ const Header = () => {
 <div><Link href={"/"}><span> NextTV</span></Link></div>
 <nav className="header_nav hidden sm:block">
     <ul className="flex gap-8 ">
-        <li><Link href={"/"}> Home</Link></li>
-        <li><Link href={"/channel"}> Channel</Link></li>
-        <li className="cursor-pointer" onClick={()=>setKategory(!kategory)}>Kategory</li>
+        <li><Link href={"/"}>Главная</Link></li>
+        <li><Link href={"/channel"}> Телеканалы</Link></li>
+        <li className="cursor-pointer" onClick={()=>setKategory(!kategory)}>Категории</li>
         
         
     </ul>
@@ -49,8 +49,7 @@ const Header = () => {
       />
     </button></div>
 
-<div>
-lng</div>
+    <div id="google_translate_element" />
   </div>
 
         </div>
@@ -73,9 +72,9 @@ lng</div>
       open?(
         <nav className={style.nav_mobile}>
         <ul className="flex flex-col gap-2 ">
-      <li><Link href={"/"}> Home</Link></li>
-      <li><Link href={"/channel"}> Channel</Link></li>
-      <li className="cursor-pointer" onClick={()=>setKategory(!kategory)}>Kategory</li>
+      <li><Link href={"/"}> Главная</Link></li>
+      <li><Link href={"/channel"}> Телеканалы</Link></li>
+      <li className="cursor-pointer" onClick={()=>setKategory(!kategory)}>Категории</li>
       
       
   </ul></nav>):("")
