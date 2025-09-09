@@ -8,6 +8,7 @@ import Image from "../../../../node_modules/next/image";
 import { useParams, useRouter } from "../../../../node_modules/next/navigation"
 import ReactPlayer from 'react-player';
 
+
 import {
   MediaController,
   MediaControlBar,
@@ -16,9 +17,7 @@ import {
   MediaMuteButton,
   MediaFullscreenButton,
 } from "media-chrome/react";
-
-import { GetServerSideProps,InferGetServerSidePropsType } from "../../../../node_modules/next/types";
-import { GET } from "@/app/api/get-location/route";
+import SectionQ from "@/app/Components/SectionQ/index";
 
 
 
@@ -29,23 +28,24 @@ const ChannelID = () => {
     const params=useParams();
     const router =useRouter();
     const [numberCH,setNumberCH]=useState<number>()
-    const [msg, setMsg] = useState<string|null>("0");
+    const [msg, setMsg] = useState<string|undefined>("/video/loadingTwo.mp4");
     const [filterCH,setFilterCH]= useState<Channel[]>()
     const num:number= Number(params.channelID);
     const filter:Channel[] = channelInfo.filter((item)=>item.id==num);
     const filtertwo:string[]= filter.map((item)=>item.url);
-    const parse:string =filtertwo.join()
+    const filterthree: string[] = filter.flatMap(item =>
+      item.urlThree ? [item.urlThree] : []
+    );
+    const parse:string =filtertwo.join();
+    const parseThree:string =filterthree.join();
     const url2: number[] = filter
     .filter(item => item.urlTwo !== undefined)
     .flatMap(item => item.urlTwo!);
-    const expires = Date.now() + 5 * 60 * 1000;
-   const key=Math.random().toString(36).substring(2, 15);
-  let u:number[]=[]
+  const u:number[]=[]
     for(let i:number=0;i<=parse.length-1;i++){
        u.push(parse.charCodeAt(i)-num);
       
     }
-console.log("urlTwo:[",u.join(),"],");
 
     
     let decoded:string = "";
@@ -63,8 +63,12 @@ if(url2[i]==0){
      if(decoded=="false"){
       fetch(`/api/get-location?url=${encodeURIComponent(parse)}`)
       .then((res) => res.json())
-      .then((data) => setMsg(data.location))
-      .catch(() => setMsg("Error fetching"));}
+      .then((data) => {if(data?.location){
+        setMsg(data.location)}
+      else{
+    setMsg(parseThree);
+      }})
+        .catch(() => setMsg("Error fetching"));}
       else{
         setMsg(parse);
       }
@@ -81,6 +85,8 @@ if(url2[i]==0){
         */
   
     },[params]);
+    
+    
     useEffect(() => {
       
       const handleKeyDown = (event: KeyboardEvent) => {
@@ -118,15 +124,16 @@ if(url2[i]==0){
   return (
     
       <section>
-    
+    <span className="NumCh_hidden">{numberCH}</span>
     {filterCH?(filterCH.map((item)=>
         (<div key={item.id} className="custom_container">
-        <div className="flex items-start gap-5"><Image style={{ backgroundColor: `${item.bgColor}`, borderRadius: "14px"  }} src={item.img} height={150} alt="channel"/> <p>{item.description}</p></div>
+        <div className="flex flex-col pt-[95px] pb-[50px] px-[5px] items-center text-justify gap-5 md:px-[30px] md:flex-row"><Image style={{ backgroundColor: `${item.bgColor}`, borderRadius: "14px"  }} src={item.img} height={150} alt="channel"/> <p className="text-[14px] text-[#000040] sm:text-[1rem]">{item.description}</p></div>
         
         
         <div >
         
         <MediaController
+        
       style={{
         width: "100%",
         aspectRatio: "16/9",
@@ -135,13 +142,13 @@ if(url2[i]==0){
       <ReactPlayer  
         slot="media"
         src={msg}
+        
+        
+        playing={true}
+        muted={true}
         controls={false}
-        style={{
-          width: "100%",
-          height: "100%",
-          "--controls": "none",
-        }}
       ></ReactPlayer>
+      
       <MediaControlBar className="mcontrolbar">
         <MediaPlayButton className="mbtn"/>
         <MediaMuteButton className="mbtn"/>
@@ -151,6 +158,7 @@ if(url2[i]==0){
     </MediaController>
 
         </div>
+        <SectionQ/>
         </div>)
     
     )
@@ -163,3 +171,5 @@ if(url2[i]==0){
 }
 
 export default ChannelID
+
+
